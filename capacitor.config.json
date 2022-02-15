@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "TTDSWebApp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
