@@ -7,6 +7,32 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  prefersDark: boolean;
+
+  constructor() {
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (systemDark){
+      this.prefersDark = true;
+      document.body.setAttribute('data-theme', 'dark');
+    } else {
+      this.prefersDark = false;
+    }
+  }
+
+  toggleDarkTheme() {
+    console.log('Button Clicked');
+  }
+
+  changeColors(){
+    if (this.prefersDark){
+      document.body.setAttribute('data-theme', 'light');
+      this.prefersDark = false;
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      this.prefersDark = true;
+    }
+  }
+
+
 
 }
