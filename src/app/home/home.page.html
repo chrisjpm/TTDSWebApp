@@ -27,23 +27,100 @@
   </ion-list>
 
   <ion-searchbar animated></ion-searchbar>
+
   <ion-popover trigger="filter-button">
     <ng-template>
       <ion-content>
         <ion-list>
-          <ion-list-header>Ionic</ion-list-header>
-          <ion-item button>Learn Ionic</ion-item>
-          <ion-item button>Documentation</ion-item>
-          <ion-item button>Showcase</ion-item>
-          <ion-item button>GitHub Repo</ion-item>
-          <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item>
+          <ion-list-header>Filters</ion-list-header>
+
+          <ion-item>
+            <ion-accordion-group>
+              <ion-accordion value="shapes">
+                <ion-item slot="header">
+                  <ion-label>Time Frame</ion-label>
+                </ion-item>
+
+                <ion-list slot="content">
+                  <ion-item>
+                    <ion-label>Any Time</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past hour</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past 24 hours</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past week</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past month</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-item>
+          <ion-item>
+            <ion-accordion-group>
+              <ion-accordion value="shapes">
+                <ion-item slot="header">
+                  <ion-label>Category</ion-label>
+                </ion-item>
+
+                <ion-list slot="content">
+                  <ion-item>
+                    <ion-label>Tech</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Nutrition</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Bleuh</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>ascakjsca</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>wcjcaec</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-item>
+
+          <ion-item button>Some other filter</ion-item>
+          <!-- <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item> -->
         </ion-list>
+
+
       </ion-content>
     </ng-template>
   </ion-popover>
 
   <ion-card>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/VzCy0REnIq8?start=10&end=60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <ion-card-content>
+      1 result in 0 seconds
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Video Title
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/VzCy0REnIq8?start=10&end=60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-title>
+        We Recommend:
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Something here to show time frames?
+    </ion-card-content>
   </ion-card>
 
 

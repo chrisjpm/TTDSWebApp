@@ -19,10 +19,6 @@ export class HomePage {
     }
   }
 
-  toggleDarkTheme() {
-    console.log('Button Clicked');
-  }
-
   changeColors(){
     if (this.prefersDark){
       document.body.setAttribute('data-theme', 'light');
