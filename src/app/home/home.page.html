@@ -98,31 +98,41 @@
     </ng-template>
   </ion-popover>
 
-  <ion-card>
-    <ion-card-content>
-      1 result in 0 seconds
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        Video Title
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <iframe width="100%" height="315" src="https://www.youtube.com/embed/VzCy0REnIq8?start=10&end=60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </ion-card-content>
-    <ion-card-header>
-      <ion-card-title>
-        We Recommend:
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Something here to show time frames?
-    </ion-card-content>
-  </ion-card>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-content>
+            1 result in 0 seconds
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Video Title
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/VzCy0REnIq8?start=10&end=60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </ion-card-content>
+          <ion-card-header>
+            <ion-card-title>
+              We Recommend:
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Something here to show time frames?
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 </ion-content>
