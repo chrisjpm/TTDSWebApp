@@ -5,7 +5,7 @@
         <!-- <ion-icon slot="start" name="refresh"></ion-icon> -->
       <!-- </ion-button> -->
     <!-- </ion-buttons> -->
-    <ion-title>
+    <ion-title class="ion-text-center">
       Clips Ninja
     </ion-title>
   </ion-toolbar>
@@ -21,12 +21,13 @@
   <ion-list>
     <ion-item lines="full">
       <ion-icon id="filter-button" slot="start" name="filter-outline"></ion-icon>
+      <ion-searchbar style="width: 80vw; margin: 0 auto;display:block;position:relative" align-center placeholder="search"></ion-searchbar>
       <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
       <ion-icon slot="end"name="contrast-outline"></ion-icon>
     </ion-item>
   </ion-list>
 
-  <ion-searchbar animated></ion-searchbar>
+  <!-- <ion-searchbar animated></ion-searchbar> -->
 
   <ion-popover trigger="filter-button">
     <ng-template>
