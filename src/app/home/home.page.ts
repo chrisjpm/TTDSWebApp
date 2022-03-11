@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,15 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   prefersDark: boolean;
+  idsList = ['VzCy0REnIq8','O2HXZBW7NUs','dngSZc_LOGE','VDkgu4Vj1CY','BTOM7IVDFsI',
+    'O0KYzeqUurk','5Qgp7cj98zE','VJKSUCqfBTo','Ve0TFbbUD9U','yxcDWiOwXrc'];
+  safeTuples: [SafeResourceUrl, SafeResourceUrl][] = [];
+  ham: string;
 
-  constructor() {
+  testUrl: SafeResourceUrl;
+  testThumbnail: SafeResourceUrl;
+
+  constructor(private domSanitizer: DomSanitizer) {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (systemDark){
       this.prefersDark = true;
@@ -26,6 +34,28 @@ export class HomePage {
     } else {
       document.body.setAttribute('data-theme', 'dark');
       this.prefersDark = true;
+    }
+  }
+
+  update(){
+    const id = 'VzCy0REnIq8';
+    const urlstring = 'https://www.youtube.com/embed/'+id+'?start=10&end=60';
+    this.testUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(urlstring);
+    const tnString = 'https://img.youtube.com/vi/'+id+'/mqdefault.jpg';
+    this.testThumbnail = tnString;
+    console.log(this.testUrl);
+  }
+
+  imFeelingLucky(){
+    console.log('idsList = ' + this.idsList);
+    // eslint-disable-next-line guard-for-in
+    for (const i in this.idsList){
+      console.log('Video id = ' + this.idsList[i]);
+      const urlstring = 'https://www.youtube.com/embed/' + this.idsList[i] + '?start=10';
+      console.log('string is ' + urlstring);
+      const tnString = 'https://img.youtube.com/vi/'+this.idsList[i]+'/mqdefault.jpg';
+      this.safeTuples.push([this.domSanitizer.bypassSecurityTrustResourceUrl(urlstring),
+        this.domSanitizer.bypassSecurityTrustResourceUrl(tnString)]);
     }
   }
 
