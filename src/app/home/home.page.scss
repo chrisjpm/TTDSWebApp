@@ -1,27 +1,96 @@
-#container {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Allan:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,700;1,400;1,600;1,800&display=swap');
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
+a {
   text-decoration: none;
+}
+
+ion-toolbar {
+  display: flex !important;
+}
+
+#header-title {
+  font-size: 1.5em;
+  display: inline-block;
+  padding: 0em 8px !important;
+  font-family: 'Sarabun', sans-serif;
+}
+
+img#header-logo {
+  display: inline-block;
+  height: 30px;
+}
+
+#filter-button {
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+ion-searchbar {
+  width: 66.5vw;
+  height: 0;
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ion-icon.search-buttons {
+  font-size: 15px;
+}
+
+.card-col {
+  padding: 0 !important;
+}
+
+.card-section {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.card-section * {
+  display: inline-block;
+}
+
+.card-section ion-button {
+  padding-left: 3px;
+  cursor: default;
+}
+
+ion-card-header a {
+  line-height: 2em;
+}
+
+div.card-thumb {
+  position: relative;
+  float: left;
+  width: 40%;
+}
+
+img.card-thumb {
+  height: 100%;
+  width: 100%;
+}
+
+.card-content {
+  padding-left: 20px;
+}
+
+@media only screen and (max-width: 1030px) {
+  #header-title, #themeToggle, #toggle-icon {
+    display: none;
+  }
+
+  #filter-button {
+    padding-right: 2px;
+  }
+
+  ion-searchbar {
+    width: 67vw;
+    height: 0;
+    text-align: center;
+    margin: 0;
+  }
 }
