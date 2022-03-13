@@ -49,8 +49,6 @@ export class HomePage {
   }
 
   async search(){
-
-
     //hide landing info
     document.getElementById('landing-info').hidden = true;
 
@@ -59,35 +57,50 @@ export class HomePage {
     const data = this.searchQuery
     console.log('data is ' + data);
 
-    await fetch(queryUrl, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin,
-      // origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify({data: 'ham'}) // body data type must match 'Content-Type' header
+    // await fetch(queryUrl, {
+    //   method: 'GET',
+    //   mode: 'cors',
+    //   cache: 'no-cache',
+    //   credentials: 'same-origin',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   redirect: 'follow', // manual, *follow, error
+    //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin,
+    //   // origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    //   body: JSON.stringify({data: 'ham'}) // body data type must match 'Content-Type' header
+    // // });
+    // // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    // }).then(function(response) {
+    //   if (response.status !== 200) {
+    //     console.log('Looks like there was a problem. Status code: ${response.status}');
+    //     return;
+    //   }
+    //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    //   response.json().then(function(data) {
+    //     console.log(data);
+    //   });
+    // // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
+    // }).catch(function(error) {
+    //   console.log('Fetch error: ' + error);
     // });
-    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    }).then(function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status code: ${response.status}');
-        return;
+
+    const query = await fetch(
+      `http://35.230.150.245:9090/?query=${data.replace(' ', '_')}`,
+      {
+        method: "GET"
       }
-      // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-      response.json().then(function(data) {
-        console.log(data);
-      });
-    // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    }).catch(function(error) {
-      console.log('Fetch error: ' + error);
-    });
+    );
+
+    if (query.status != 200) {
+      console.log('Error sending data');
+      return;
+    }
+
+    const res = await query.json();
+
+    console.log(res);
+
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.idsList){
