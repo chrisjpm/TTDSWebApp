@@ -7,7 +7,7 @@
           Clips Ninja
         </ion-title>
       </div>
-      <ion-searchbar align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
+      <ion-searchbar [(ngModel)] = "searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
 
       <ion-icon slot="end" id="filter-button" name="filter-outline"></ion-icon>
       <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
