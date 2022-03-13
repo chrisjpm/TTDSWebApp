@@ -20,69 +20,109 @@
   <ion-popover trigger="filter-button">
     <ng-template>
       <ion-content>
-        <ion-list>
+        <ion-list lines="none">
           <ion-list-header>Filters</ion-list-header>
-
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
                   <ion-label>Time Frame</ion-label>
                 </ion-item>
-
                 <ion-list slot="content">
                   <ion-item>
                     <ion-label>Any Time</ion-label>
+                    <ion-checkbox slot="end" checked="true"></ion-checkbox>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past hour</ion-label>
+                    <ion-label>Past Hour</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past 24 hours</ion-label>
+                    <ion-label>Past 24 Hours</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past week</ion-label>
+                    <ion-label>Past Week</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past month</ion-label>
+                    <ion-label>Past Month</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past Year</ion-label>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
           </ion-item>
+
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
-                  <ion-label>Category</ion-label>
+                  <ion-label>Topic</ion-label>
                 </ion-item>
 
-                <ion-list slot="content">
+                <ion-list slot="content">  <!-- can dynamically add topics if just filtering results (not searching again) -->
                   <ion-item>
-                    <ion-label>Tech</ion-label>
+                    <ion-label>Knowledge</ion-label>  <!-- very common -->
                   </ion-item>
                   <ion-item>
-                    <ion-label>Nutrition</ion-label>
+                    <ion-label>Technology</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Bleuh</ion-label>
+                    <ion-label>Politics</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>ascakjsca</ion-label>
+                    <ion-label>Society</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>wcjcaec</ion-label>
+                    <ion-label>Religion</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Business</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Health</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Lifestyle (Sociology)</ion-label> <!-- very common -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Sport</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Physical Fitness</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Entertainment</ion-label> <!-- very common -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Film</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Television Program</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Music</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Hobby</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Video Game</ion-label>  <!-- not sure if it's own topic, but is substring of many -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Food</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Fashion</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Pet</ion-label>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
           </ion-item>
-
-          <ion-item button>Some other filter</ion-item>
-          <!-- <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item> -->
         </ion-list>
-
-
       </ion-content>
     </ng-template>
   </ion-popover>
@@ -103,16 +143,6 @@
   </ion-row>
 
   <ion-grid>
-    <!-- <ion-row>
-      <ion-col size-md="8" offset-md="2">
-        <ion-card color="success">
-          <ion-card-content>
-            However many results in however many seconds
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row> -->
-
     <ion-row id="landing-info">
       <ion-col size-md="10" offset-md="1" class="ion-text-center">
         <img id="header-logo" alt="logo" src="assets/icon/logo-white.png">
