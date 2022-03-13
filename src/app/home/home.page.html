@@ -2,13 +2,12 @@
   <ion-list>
     <ion-item lines="none">
       <div slot="start" class="ion-text-center">
-        <img id="header-logo" alt="logo" height="40" src="assets/icon/logo-white.png">
+        <img (click)="showLanding()" id="header-logo" alt="logo" height="40" src="assets/icon/logo-white.png">
         <ion-title id="header-title">
           Clips Ninja
         </ion-title>
       </div>
       <ion-searchbar [(ngModel)]="searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
-
       <ion-icon slot="end" id="filter-button" name="filter-outline"></ion-icon>
       <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
       <ion-icon id="toggle-icon" name="contrast-outline" slot="end"></ion-icon>
@@ -28,6 +27,7 @@
                 <ion-item slot="header">
                   <ion-label>Time Frame</ion-label>
                 </ion-item>
+
                 <ion-list slot="content">
                   <ion-item>
                     <ion-label>Any Time</ion-label>
@@ -131,18 +131,16 @@
     <ion-col size-md="8" offset-md="2">
       <ion-row>
         <ion-col size-md="8">
-          <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon>
-          </ion-button>
+          <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon></ion-button>
         </ion-col>
         <ion-col size-md="4">
-          <ion-button class="search-button" color="secondary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon>
-          </ion-button>
+          <ion-button class="search-button" color="secondary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>
 
-  <ion-grid>
+
     <ion-row id="landing-info">
       <ion-col size-md="10" offset-md="1" class="ion-text-center">
         <img id="header-logo" alt="logo" src="assets/icon/logo-white.png">
@@ -184,12 +182,72 @@
       </ng-template>
     </ion-modal>
 
-    <ion-row *ngFor="let tuple of safeTuples; let i = index">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-card color="success">
+          <ion-item color="success" ><ion-icon class="search-res" name="information-circle"></ion-icon>&nbsp;&nbsp;&nbsp;XX results in however XX.yys.</ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row *ngFor="let tuple of safeTuples; let i = index">
       <ion-col size-md="8" offset-md="2">
         <ion-card class="card-result">
           <ion-row>
             <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
               <a [href]=tuple[0] target="_blank">
+                <img src="assets/play.jpg" class="play-img">
+                <img class="card-thumb" [src]=tuple[1] />
+              </a>
+            </ion-col>
+            <ion-col size-lg="7" size-sm="12" size-xs="12">
+              <ion-card-content>
+                <a href="#">
+                  <ion-card-title>Video Title</ion-card-title>
+                </a>
+                <a href="#">
+                  <ion-card-subtitle>Channel Title</ion-card-subtitle>
+                </a>
+                <ion-card-subtitle>Date published:</ion-card-subtitle>
+
+                <section class="card-section">
+                  <ion-card-subtitle>Topics:</ion-card-subtitle>
+                  <ion-badge color="medium">topic1</ion-badge>
+                  <ion-badge color="medium">topic2</ion-badge>
+                </section>
+
+                <section class="card-section">
+                  <ion-card-subtitle>Tags:</ion-card-subtitle>
+                  <ion-badge color="medium">tag1</ion-badge>
+                  <ion-badge color="medium">tag2</ion-badge>
+                  <ion-badge color="medium">tag3</ion-badge>
+                </section>
+
+                <section class="card-section">
+                  <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
+                  <ion-button size="small">
+                    <ion-icon name="play"></ion-icon>1:23
+                  </ion-button>
+                </section>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-card>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-row *ngFor="let result of resultsArray; let i = index">
+      <ion-col size-md="8" offset-md="2">
+        <ion-card class="card-result">
+          <ion-row>
+            <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
+              <a [href]=result target="_blank">
                 <img src="assets/play.jpg" class="play-img">
                 <img class="card-thumb" [src]=tuple[1] />
               </a>
