@@ -92,6 +92,10 @@ ion-icon.search-res {
   }
 }
 
+.span-link {
+  cursor: pointer;
+}
+
 img.play-img {
   display: none;
   position: absolute;
@@ -107,6 +111,7 @@ img.play-img {
   display: flex;
   align-items: center;
   margin: 5px 0;
+  flex-wrap: wrap;
 }
 
 .card-section * {
@@ -119,7 +124,7 @@ img.play-img {
 }
 
 .card-section ion-badge {
-  margin-left: 3px;
+  margin: 3px 0 0 3px;
   color: white;
   font-weight: 400;
 }

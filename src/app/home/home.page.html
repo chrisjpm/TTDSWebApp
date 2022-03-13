@@ -237,48 +237,50 @@
       </ion-col>
     </ion-row> -->
 
-    <ion-card>
+    <!-- <ion-card *ngFor="let obj of vidObjects">
       <ion-card-content>
+        {{obj.videoid}}
       </ion-card-content>
-    </ion-card>
+      <ion-card-content>
+        {{obj.videoTitle}}
+      </ion-card-content>
+    </ion-card> -->
 
-    <ion-row *ngFor="let result of resultsArray; let i = index">
+    <ion-row *ngFor="let vidObj of vidObjects; let i = index">
       <ion-col size-md="8" offset-md="2">
         <ion-card class="card-result">
           <ion-row>
             <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
-              <a [href]=result target="_blank">
+              <a href="{{'https://www.youtube.com/embed/' + vidObj.videoid}}" target="_blank">
                 <img src="assets/play.jpg" class="play-img">
-                <img class="card-thumb" [src]=tuple[1] />
+                <img class="card-thumb" src="{{'https://img.youtube.com/vi/'+vidObj.videoid+'/mqdefault.jpg'}}" />
               </a>
             </ion-col>
             <ion-col size-lg="7" size-sm="12" size-xs="12">
               <ion-card-content>
-                <a href="#">
-                  <ion-card-title>Video Title</ion-card-title>
-                </a>
-                <a href="#">
-                  <ion-card-subtitle>Channel Title</ion-card-subtitle>
-                </a>
-                <ion-card-subtitle>Date published:</ion-card-subtitle>
+                <ion-card-title>
+                  <span class="span-link" (click)="clickTitle(vidObj.videoid)">{{vidObj.videoTitle}}</span>
+                </ion-card-title>
+                <ion-card-subtitle>
+                  Channel Name: <span class="span-link" (click)="clickChannel(vidObj.channelId)">{{vidObj.channelTitle}}</span>
+                </ion-card-subtitle>
+                <ion-card-subtitle>Date published: {{vidObj.date}}</ion-card-subtitle>
 
                 <section class="card-section">
                   <ion-card-subtitle>Topics:</ion-card-subtitle>
-                  <ion-badge color="medium">topic1</ion-badge>
-                  <ion-badge color="medium">topic2</ion-badge>
+                  <ion-badge *ngFor="let topic of vidObj.topics" color="medium">{{topic}}</ion-badge>
                 </section>
 
                 <section class="card-section">
                   <ion-card-subtitle>Tags:</ion-card-subtitle>
-                  <ion-badge color="medium">tag1</ion-badge>
-                  <ion-badge color="medium">tag2</ion-badge>
-                  <ion-badge color="medium">tag3</ion-badge>
+                  <ion-badge *ngFor="let tag of vidObj.videoTags" color="medium">{{tag}}</ion-badge>
                 </section>
 
                 <section class="card-section">
                   <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
-                  <ion-button size="small">
-                    <ion-icon name="play"></ion-icon>1:23
+                  <ion-button href="{{'https://www.youtube.com/embed/' + vidObj.videoid +'?start='+timeFunction(vidObj.timestamp)}}" target="_blank" size="small">
+                    <ion-icon name="play"></ion-icon>
+                    {{vidObj.timestamp}}
                   </ion-button>
                 </section>
               </ion-card-content>
@@ -289,6 +291,8 @@
     </ion-row>
 
   </ion-grid>
+<!--
+  <ion-button block="true" (click)="timeFunction('')">Time Function</ion-button> -->
 
 
 </ion-content>
