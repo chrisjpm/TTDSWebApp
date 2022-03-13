@@ -2,12 +2,12 @@
   <ion-list>
     <ion-item lines="none">
       <div slot="start" class="ion-text-center">
-        <img id="header-logo" alt="logo" height="40" src="assets/icon/logo-white.png" >
+        <img id="header-logo" alt="logo" height="40" src="assets/icon/logo-white.png">
         <ion-title id="header-title">
           Clips Ninja
         </ion-title>
       </div>
-      <ion-searchbar [(ngModel)] = "searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
 
       <ion-icon slot="end" id="filter-button" name="filter-outline"></ion-icon>
       <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
@@ -91,10 +91,12 @@
     <ion-col size-md="8" offset-md="2">
       <ion-row>
         <ion-col size-md="8">
-          <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon></ion-button>
+          <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon>
+          </ion-button>
         </ion-col>
         <ion-col size-md="4">
-          <ion-button class="search-button" color="secondary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon></ion-button>
+          <ion-button class="search-button" color="secondary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-col>
@@ -113,12 +115,44 @@
 
     <ion-row id="landing-info">
       <ion-col size-md="10" offset-md="1" class="ion-text-center">
-        <img id="header-logo" alt="logo" src="assets/icon/logo-white.png" >
+        <img id="header-logo" alt="logo" src="assets/icon/logo-white.png">
         <h1>Welcome to <span id="landing-name">Clips Ninja</span>!</h1>
         <h5>Search our database of educational youtube video transcripts using the searchbar at the top of the page!</h5>
-        <a href="#">More Info</a>&nbsp;&nbsp;&nbsp;<a href="#">Privacy</a>&nbsp;&nbsp;&nbsp;<a href="#">Credits</a>
+        <ion-button color="secondary" id="info">More Info</ion-button>&nbsp;&nbsp;&nbsp;
+        <ion-button color="secondary" id="privacy">Privacy</ion-button>&nbsp;&nbsp;&nbsp;
+        <ion-button color="secondary" id="credits">Credits</ion-button>
       </ion-col>
     </ion-row>
+
+    <ion-modal trigger="info" [isOpen]="false" [swipeToClose]="true">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>More Info</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal trigger="privacy" [isOpen]="false" [swipeToClose]="true">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>Privacy</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal trigger="credits" [isOpen]="false" [swipeToClose]="true">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>Credits</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
 
     <ion-row *ngFor="let tuple of safeTuples; let i = index">
       <ion-col size-md="8" offset-md="2">
@@ -127,13 +161,17 @@
             <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
               <a [href]=tuple[0] target="_blank">
                 <img src="assets/play.jpg" class="play-img">
-                <img class="card-thumb" [src]=tuple[1]/>
+                <img class="card-thumb" [src]=tuple[1] />
               </a>
             </ion-col>
             <ion-col size-lg="7" size-sm="12" size-xs="12">
               <ion-card-content>
-                <a href="#"><ion-card-title>Video Title</ion-card-title></a>
-                <a href="#"><ion-card-subtitle>Channel Title</ion-card-subtitle></a>
+                <a href="#">
+                  <ion-card-title>Video Title</ion-card-title>
+                </a>
+                <a href="#">
+                  <ion-card-subtitle>Channel Title</ion-card-subtitle>
+                </a>
                 <ion-card-subtitle>Date published:</ion-card-subtitle>
 
                 <section class="card-section">
@@ -151,7 +189,9 @@
 
                 <section class="card-section">
                   <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
-                  <ion-button size="small"><ion-icon name="play"></ion-icon>1:23</ion-button>
+                  <ion-button size="small">
+                    <ion-icon name="play"></ion-icon>1:23
+                  </ion-button>
                 </section>
               </ion-card-content>
             </ion-col>
