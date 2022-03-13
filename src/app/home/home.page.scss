@@ -9,7 +9,11 @@ ion-toolbar {
   display: flex !important;
 }
 
-.card-content-md {
+ion-toast {
+  z-index: 0 !important;
+}
+
+ion-modal ng-template .card-content-md {
   padding: 30px;
 }
 
@@ -56,6 +60,10 @@ ion-searchbar {
 
 ion-icon.search-buttons {
   font-size: 15px;
+}
+
+ion-icon.search-res {
+  font-size: 25px;
 }
 
 .card-col {
