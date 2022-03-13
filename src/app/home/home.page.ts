@@ -88,6 +88,33 @@ export class HomePage {
     }).catch(function(error) {
       console.log('Fetch error: ' + error);
     });
+
+    // eslint-disable-next-line guard-for-in
+    for (const i in this.idsList){
+      console.log('Video id = ' + this.idsList[i]);
+      const urlstring = 'https://www.youtube.com/embed/' + this.idsList[i] + '?start=10';
+      console.log('string is ' + urlstring);
+      const tnString = 'https://img.youtube.com/vi/'+this.idsList[i]+'/mqdefault.jpg';
+      this.safeTuples.push([this.domSanitizer.bypassSecurityTrustResourceUrl(urlstring),
+        this.domSanitizer.bypassSecurityTrustResourceUrl(tnString)]);
+    }
+
+    // toast time taken and # results
+    const toast = await this.toastController.create({
+      message: 'X results found in Ys',
+      color: 'success',
+      icon: 'information-circle',
+      buttons: [
+        {
+          text: 'Okay!',
+          role: 'cancel',
+          handler: () => {
+            console.log('Toast dismissed');
+          }
+        }
+      ]
+    });
+    toast.present();
   }
 
   async imFeelingLucky(){
@@ -104,30 +131,6 @@ export class HomePage {
 
     console.log(luckyString);
 
-    // eslint-disable-next-line guard-for-in
-    for (const i in this.idsList){
-      console.log('Video id = ' + this.idsList[i]);
-      const urlstring = 'https://www.youtube.com/embed/' + this.idsList[i] + '?start=10';
-      console.log('string is ' + urlstring);
-      const tnString = 'https://img.youtube.com/vi/'+this.idsList[i]+'/mqdefault.jpg';
-      this.safeTuples.push([this.domSanitizer.bypassSecurityTrustResourceUrl(urlstring),
-        this.domSanitizer.bypassSecurityTrustResourceUrl(tnString)]);
-    }
-
-    const toast = await this.toastController.create({
-      message: 'X results found in Ys',
-      color: 'success',
-      icon: 'information-circle',
-      buttons: [
-        {
-          text: 'Okay!',
-          role: 'cancel',
-          handler: () => {
-            console.log('Toast dismissed');
-          }
-        }
-      ]
-    });
-    toast.present();
+    //search top X and open top result in new tab
   }
 }
