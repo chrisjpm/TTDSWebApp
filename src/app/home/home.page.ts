@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomePage {
   testUrl: SafeResourceUrl;
   testThumbnail: SafeResourceUrl;
 
-  constructor(private domSanitizer: DomSanitizer) {
+  constructor(private domSanitizer: DomSanitizer, public toastController: ToastController) {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (systemDark){
       this.prefersDark = true;
@@ -46,8 +47,17 @@ export class HomePage {
     console.log(this.testUrl);
   }
 
-  imFeelingLucky(){
+  search(){
+    //hide landing info
+    document.getElementById('landing-info').hidden = true;
+  }
+
+  async imFeelingLucky(){
     console.log('idsList = ' + this.idsList);
+
+    //hide landing info
+    document.getElementById('landing-info').hidden = true;
+
     // eslint-disable-next-line guard-for-in
     for (const i in this.idsList){
       console.log('Video id = ' + this.idsList[i]);
@@ -57,8 +67,21 @@ export class HomePage {
       this.safeTuples.push([this.domSanitizer.bypassSecurityTrustResourceUrl(urlstring),
         this.domSanitizer.bypassSecurityTrustResourceUrl(tnString)]);
     }
+
+    const toast = await this.toastController.create({
+      message: 'X results found in Ys',
+      color: 'success',
+      icon: 'information-circle',
+      buttons: [
+        {
+          text: 'Okay!',
+          role: 'cancel',
+          handler: () => {
+            console.log('Toast dismissed');
+          }
+        }
+      ]
+    });
+    toast.present();
   }
-
-
-
 }

@@ -9,6 +9,18 @@ ion-toolbar {
   display: flex !important;
 }
 
+#landing-info {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+#landing-name {
+  font-family: 'Sarabun', sans-serif;
+}
+
 #header-title {
   font-size: 1.5em;
   display: inline-block;
@@ -34,6 +46,7 @@ ion-searchbar {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
 ion-icon.search-buttons {
@@ -42,6 +55,39 @@ ion-icon.search-buttons {
 
 .card-col {
   padding: 0 !important;
+}
+
+.card-result:hover {
+  ion-row .card-col a img.card-thumb {
+    opacity: 0.2;
+    transition: .22s ease-in-out;
+  }
+
+  ion-row .card-col a img.play-img {
+    display: block;
+  }
+}
+
+.card-result:focus {
+  ion-row .card-col a img.card-thumb {
+    opacity: 0.2;
+    transition: .22s ease-in-out;
+  }
+
+  ion-row .card-col a img.play-img {
+    display: block;
+  }
+}
+
+img.play-img {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 45%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transition: .22s ease-in-out;
 }
 
 .card-section {
@@ -55,23 +101,32 @@ ion-icon.search-buttons {
 }
 
 .card-section ion-button {
-  padding-left: 3px;
-  cursor: default;
+  margin-left: 3px;
+  font-weight: 700;
+}
+
+.card-section ion-badge {
+  margin-left: 3px;
+  color: white;
+  font-weight: 400;
+}
+
+ion-card-content a:hover {
+  text-decoration: underline;
+  color: white;
 }
 
 ion-card-header a {
   line-height: 2em;
 }
 
-div.card-thumb {
-  position: relative;
-  float: left;
-  width: 40%;
-}
-
 img.card-thumb {
   height: 100%;
   width: 100%;
+}
+
+.no-pointer:hover {
+  cursor: crosshair;
 }
 
 .card-content {
