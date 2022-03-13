@@ -124,7 +124,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-modal trigger="info" [isOpen]="false" [swipeToClose]="true">
+    <ion-modal trigger="info" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
       <ng-template>
         <ion-card-content class="ion-text-center">
           <ion-card-title>More Info</ion-card-title>
@@ -134,7 +134,7 @@
       </ng-template>
     </ion-modal>
 
-    <ion-modal trigger="privacy" [isOpen]="false" [swipeToClose]="true">
+    <ion-modal trigger="privacy" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
       <ng-template>
         <ion-card-content class="ion-text-center">
           <ion-card-title>Privacy</ion-card-title>
@@ -144,7 +144,7 @@
       </ng-template>
     </ion-modal>
 
-    <ion-modal trigger="credits" [isOpen]="false" [swipeToClose]="true">
+    <ion-modal trigger="credits" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
       <ng-template>
         <ion-card-content class="ion-text-center">
           <ion-card-title>Credits</ion-card-title>
