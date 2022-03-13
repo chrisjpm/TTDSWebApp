@@ -1,208 +1,231 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <!-- <ion-buttons slot="end"> -->
-      <!-- <ion-button id="changeText" (click)="toggleDarkTheme()"> -->
-        <!-- <ion-icon slot="start" name="refresh"></ion-icon> -->
-      <!-- </ion-button> -->
-    <!-- </ion-buttons> -->
-    
-    <ion-title class="ion-text-center">
-      Clips Ninja
-      <img alt="logo" height="40"   src="assets/icon/logo.png" >
+  <ion-list>
+    <ion-item lines="none">
+      <div slot="start" class="ion-text-center">
+        <img id="header-logo" alt="logo" height="40" src="assets/icon/logo-white.png">
+        <ion-title id="header-title">
+          Clips Ninja
+        </ion-title>
+      </div>
+      <ion-searchbar [(ngModel)]="searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
 
-    </ion-title>
-  </ion-toolbar>
+      <ion-icon slot="end" id="filter-button" name="filter-outline"></ion-icon>
+      <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
+      <ion-icon id="toggle-icon" name="contrast-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Clips Ninja</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-list>
-    <ion-item lines="full">
-      <ion-icon id="filter-button" slot="start" name="filter-outline"></ion-icon>
-      <ion-searchbar style="width: 80vw; margin: 0 auto;display:block;position:relative" align-center placeholder="search"></ion-searchbar>
-      <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
-      <ion-icon slot="end"name="contrast-outline"></ion-icon>
-    </ion-item>
-  </ion-list>
-
-  <!-- <ion-searchbar animated></ion-searchbar> -->
-
   <ion-popover trigger="filter-button">
     <ng-template>
       <ion-content>
-        <ion-list>
+        <ion-list lines="none">
           <ion-list-header>Filters</ion-list-header>
-
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
                   <ion-label>Time Frame</ion-label>
                 </ion-item>
-
                 <ion-list slot="content">
                   <ion-item>
                     <ion-label>Any Time</ion-label>
+                    <ion-checkbox slot="end" checked="true"></ion-checkbox>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past hour</ion-label>
+                    <ion-label>Past Hour</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past 24 hours</ion-label>
+                    <ion-label>Past 24 Hours</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past week</ion-label>
+                    <ion-label>Past Week</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Past month</ion-label>
+                    <ion-label>Past Month</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Past Year</ion-label>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
           </ion-item>
+
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
-                  <ion-label>Category</ion-label>
+                  <ion-label>Topic</ion-label>
                 </ion-item>
 
-                <ion-list slot="content">
+                <ion-list slot="content">  <!-- can dynamically add topics if just filtering results (not searching again) -->
                   <ion-item>
-                    <ion-label>Tech</ion-label>
+                    <ion-label>Knowledge</ion-label>  <!-- very common -->
                   </ion-item>
                   <ion-item>
-                    <ion-label>Nutrition</ion-label>
+                    <ion-label>Technology</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>Bleuh</ion-label>
+                    <ion-label>Politics</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>ascakjsca</ion-label>
+                    <ion-label>Society</ion-label>
                   </ion-item>
                   <ion-item>
-                    <ion-label>wcjcaec</ion-label>
+                    <ion-label>Religion</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Business</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Health</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Lifestyle (Sociology)</ion-label> <!-- very common -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Sport</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Physical Fitness</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Entertainment</ion-label> <!-- very common -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Film</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Television Program</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Music</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Hobby</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Video Game</ion-label>  <!-- not sure if it's own topic, but is substring of many -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Food</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Fashion</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Pet</ion-label>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
           </ion-item>
-
-          <ion-item button>Some other filter</ion-item>
-          <!-- <ion-item lines="none" detail="false" button onClick="dismissPopover()">Close</ion-item> -->
         </ion-list>
-
-
       </ion-content>
     </ng-template>
   </ion-popover>
 
-  <ion-button (click)="imFeelingLucky()" expand="block">I'm feeling Lucky</ion-button>
-  <!-- <ion-button (click)="update()" expand="block">Update</ion-button> -->
+  <ion-row>
+    <ion-col size-md="8" offset-md="2">
+      <ion-row>
+        <ion-col size-md="8">
+          <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size-md="4">
+          <ion-button class="search-button" color="secondary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 
   <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-card>
-          <ion-card-content>
-            However many results in however many seconds
-          </ion-card-content>
-        </ion-card>
+    <ion-row id="landing-info">
+      <ion-col size-md="10" offset-md="1" class="ion-text-center">
+        <img id="header-logo" alt="logo" src="assets/icon/logo-white.png">
+        <h1>Welcome to <span id="landing-name">Clips Ninja</span>!</h1>
+        <h5>Search our database of educational youtube video transcripts using the searchbar at the top of the page!</h5>
+        <ion-button color="secondary" id="info">More Info</ion-button>&nbsp;&nbsp;&nbsp;
+        <ion-button color="secondary" id="privacy">Privacy</ion-button>&nbsp;&nbsp;&nbsp;
+        <ion-button color="secondary" id="credits">Credits</ion-button>
       </ion-col>
     </ion-row>
 
+    <ion-modal trigger="info" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>More Info</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
 
-    <!-- <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-card>
-          <a href="https://www.youtube.com/embed/VzCy0REnIq8?start=10&end=60" target="_blank">
-            <img  src="https://img.youtube.com/vi/VzCy0REnIq8/mqdefault.jpg" />
-          </a>
-          <ion-card-header>
-            <ion-card-title>
-              Video Title
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Video Description
-          </ion-card-content>
-          <ion-card-header>
-            <ion-card-subtitle>
-              We Recommend:
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <section>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-            </section>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    <ion-modal trigger="privacy" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>Privacy</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
 
-    <ion-row>
-      <ion-col size-md="6" offset-md="3">
-        <ion-card>
-          <a [href]=testUrl target="_blank">
-            <img  [src]=testThumbnail />
-          </a>
-          <ion-card-header>
-            <ion-card-title>
-              Video Title
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Video Description
-          </ion-card-content>
-          <ion-card-header>
-            <ion-card-subtitle>
-              We Recommend:
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <section>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-            </section>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row> -->
+    <ion-modal trigger="credits" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
+      <ng-template>
+        <ion-card-content class="ion-text-center">
+          <ion-card-title>Credits</ion-card-title>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </ion-card-content>
+      </ng-template>
+    </ion-modal>
 
     <ion-row *ngFor="let tuple of safeTuples; let i = index">
-      <ion-col size-md="6" offset-md="3">
-        <ion-card>
-          <a [href]=tuple[0] target="_blank">
-            <img  [src]=tuple[1] />
-          </a>
-          <ion-card-header>
-            <ion-card-title>
-              Video Title
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Video Description
-          </ion-card-content>
-          <ion-card-header>
-            <ion-card-subtitle>
-              We Recommend:
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <section>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-              <ion-button size="small">1:23</ion-button>
-            </section>
-          </ion-card-content>
+      <ion-col size-md="8" offset-md="2">
+        <ion-card class="card-result">
+          <ion-row>
+            <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
+              <a [href]=tuple[0] target="_blank">
+                <img src="assets/play.jpg" class="play-img">
+                <img class="card-thumb" [src]=tuple[1] />
+              </a>
+            </ion-col>
+            <ion-col size-lg="7" size-sm="12" size-xs="12">
+              <ion-card-content>
+                <a href="#">
+                  <ion-card-title>Video Title</ion-card-title>
+                </a>
+                <a href="#">
+                  <ion-card-subtitle>Channel Title</ion-card-subtitle>
+                </a>
+                <ion-card-subtitle>Date published:</ion-card-subtitle>
+
+                <section class="card-section">
+                  <ion-card-subtitle>Topics:</ion-card-subtitle>
+                  <ion-badge color="medium">topic1</ion-badge>
+                  <ion-badge color="medium">topic2</ion-badge>
+                </section>
+
+                <section class="card-section">
+                  <ion-card-subtitle>Tags:</ion-card-subtitle>
+                  <ion-badge color="medium">tag1</ion-badge>
+                  <ion-badge color="medium">tag2</ion-badge>
+                  <ion-badge color="medium">tag3</ion-badge>
+                </section>
+
+                <section class="card-section">
+                  <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
+                  <ion-button size="small">
+                    <ion-icon name="play"></ion-icon>1:23
+                  </ion-button>
+                </section>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
         </ion-card>
       </ion-col>
     </ion-row>
