@@ -52,48 +52,26 @@ export class HomePage {
     //hide landing info
     document.getElementById('landing-info').hidden = true;
 
-    const queryUrl = '' // whatever it ends up being
-
     const data = this.searchQuery
-    console.log('data is ' + data);
-
-    // await fetch(queryUrl, {
-    //   method: 'GET',
-    //   mode: 'cors',
-    //   cache: 'no-cache',
-    //   credentials: 'same-origin',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   redirect: 'follow', // manual, *follow, error
-    //   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin,
-    //   // origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //   body: JSON.stringify({data: 'ham'}) // body data type must match 'Content-Type' header
-    // // });
-    // // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    // }).then(function(response) {
-    //   if (response.status !== 200) {
-    //     console.log('Looks like there was a problem. Status code: ${response.status}');
-    //     return;
-    //   }
-    //   // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    //   response.json().then(function(data) {
-    //     console.log(data);
-    //   });
-    // // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-    // }).catch(function(error) {
-    //   console.log('Fetch error: ' + error);
-    // });
+    console.log('Query: ' + data);
 
     const query = await fetch(
       `http://35.230.150.245:9090/?query=${data.replace(' ', '_')}`,
       {
-        method: "GET"
+        method: "GET",
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
       }
     );
 
     if (query.status != 200) {
-      console.log('Error sending data');
+      console.log('Error retrieving data!');
       return;
     }
 
@@ -131,8 +109,6 @@ export class HomePage {
   }
 
   async imFeelingLucky(){
-    console.log('idsList = ' + this.idsList);
-
     //hide landing info
     document.getElementById('landing-info').hidden = true;
 
