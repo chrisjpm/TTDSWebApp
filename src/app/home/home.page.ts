@@ -268,11 +268,11 @@ export class HomePage {
   }
 
   clickTitle(videoid: string){
-    window.open('https://www.youtube.com/embed/' + videoid);
+    window.open('https://www.youtube.com/embed/' + videoid, '_blank');
   }
 
   clickChannel(channelid: string){
-    window.open('https://www.youtube.com/channel/' + channelid);
+    window.open('https://www.youtube.com/channel/' + channelid, '_blank');
   }
 
   timeFunction(hms: string){
@@ -286,5 +286,10 @@ export class HomePage {
       counter+=1;
     }
     return seconds;
+  }
+
+  githubLink(id: string) {
+    window.open('https://github.com/' + id, '_blank');
+    console.log("here")
   }
 }
