@@ -7,10 +7,8 @@
           Clips Ninja
         </ion-title>
       </div>
-      <ion-searchbar [(ngModel)]="searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
-      <ion-icon slot="end" id="filter-button" name="filter-outline"></ion-icon>
-      <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
-      <ion-icon id="toggle-icon" name="contrast-outline" slot="end"></ion-icon>
+      <ion-searchbar (keyup.enter)="search()" [(ngModel)]="searchQuery" align-center placeholder="Search Educational YouTube Video Transcripts"></ion-searchbar>
+      <ion-icon slot="end" id="filter-button" name="options"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-header>
@@ -20,7 +18,13 @@
     <ng-template>
       <ion-content>
         <ion-list lines="none">
-          <ion-list-header>Filters</ion-list-header>
+          <ion-item>
+            <ion-icon id="toggle-icon" name="contrast-outline"></ion-icon>&nbsp;&nbsp;&nbsp;Toggle Theme
+            <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="filter"></ion-icon>&nbsp;&nbsp;&nbsp;Filters
+          </ion-item>
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
@@ -154,18 +158,18 @@
     </ion-col>
   </ion-row>
 
-  <ion-modal trigger="info" [breakpoints]="[0, 0.1, 0.35, 1]" [initialBreakpoint]="0.35">
+  <ion-modal trigger="info" [breakpoints]="[0, 0.25, 0.5, 0.75, 1]" [initialBreakpoint]="0.5">
     <ng-template>
       <ion-card-content class="ion-text-center modal-content">
         <ion-card-title>More Info</ion-card-title>
         <br>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Our search engine allows you to search our databse of over X number of educational YouTube Videos. Enter your search terms in the search bar above and receive relevant videos where your terms appeaer in the video's transcript, long with
+        suggested timestamps to begin watching from.
       </ion-card-content>
     </ng-template>
   </ion-modal>
 
-  <ion-modal trigger="privacy" [breakpoints]="[0, 0.1, 0.32, 1]" [initialBreakpoint]="0.32">
+  <ion-modal trigger="privacy" [breakpoints]="[0, 0.25, 0.5, 0.75, 1]" [initialBreakpoint]="0.5">
     <ng-template>
       <ion-card-content class="ion-text-center modal-content">
         <ion-card-title>Privacy</ion-card-title>
@@ -180,7 +184,7 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal trigger="credits" [breakpoints]="[0, 0.1, 0.27, 1]" [initialBreakpoint]="0.27">
+  <ion-modal trigger="credits" [breakpoints]="[0, 0.25, 0.5, 0.75, 1]" [initialBreakpoint]="0.5">
     <ng-template>
       <ion-card-content class="ion-text-center modal-content">
         <ion-card-title>Credits</ion-card-title>
@@ -271,8 +275,7 @@
                 <section class="card-section">
                   <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
                   <ion-button href="{{'https://www.youtube.com/embed/' + vidObj.videoid +'?start='+timeFunction(vidObj.timestamp)}}" target="_blank" size="small">
-                    <ion-icon name="play"></ion-icon>
-                    {{vidObj.timestamp}}
+                    {{vidObj.timestamp}}<ion-icon name="play" style="margin:-2px 0 0 2px"></ion-icon>
                   </ion-button>
                 </section>
               </ion-card-content>

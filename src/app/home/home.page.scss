@@ -147,7 +147,7 @@ img.play-img {
 }
 
 .card-section ion-button {
-  margin-left: 3px;
+  margin-left: 6px;
   font-weight: 700;
 }
 
@@ -180,7 +180,7 @@ img.card-thumb {
 }
 
 @media only screen and (max-width: 1030px) {
-  #header-title, #themeToggle, #toggle-icon {
+  #header-title {
     display: none;
   }
 
