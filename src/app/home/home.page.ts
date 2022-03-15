@@ -36,9 +36,7 @@ export class HomePage {
   metadata: any = {};
 
   vidObjects: VidObject[] = [];
-
-
-
+  timeTakenString: string;
 
   constructor(private domSanitizer: DomSanitizer, public toastController: ToastController) {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -76,8 +74,9 @@ export class HomePage {
 
   async search(){
     this.resultsArray = [];
-    //hide landing info
-    document.getElementById('landing-info').hidden = true;
+    this.vidObjects = [];
+
+    const start = Date.now();
 
     const data = this.searchQuery;
     console.log('Query: ' + data);
@@ -118,7 +117,28 @@ export class HomePage {
       }
     } catch(e){
       console.log(e);
+
+      const toast = await this.toastController.create({
+        message: 'Please \'Allow\' insecure content for this site in broswer! See \'Privacy\' for help',
+        color: 'danger',
+        icon: 'warning',
+        position: 'top',
+        buttons: [
+          {
+            text: 'Okay!',
+            role: 'cancel',
+            handler: () => {
+              console.log('Toast dismissed');
+            }
+          }
+        ]
+      });
+
+      toast.present();
     }
+
+    let timeTaken = Date.now() - start;
+    this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
@@ -140,6 +160,7 @@ export class HomePage {
         date: this.metadata[this.resultsArray[i][1].video_id].date
       };
 
+      document.getElementById('landing-info').hidden = true;
       this.vidObjects.push(vidObj);
     }
   }
@@ -148,7 +169,7 @@ export class HomePage {
     const randomElement = Math.floor(Math.random() * this.feelingLucky.length);
     console.log('Query: ' + this.feelingLucky[randomElement]);
 
-    document.getElementById('landing-info').hidden = true;
+    const start = Date.now();
 
     try{
       const query = await fetch(
@@ -186,7 +207,28 @@ export class HomePage {
       }
     } catch(e){
       console.log(e);
+
+      const toast = await this.toastController.create({
+        message: 'Please \'Allow\' insecure content for this site in broswer! See \'Privacy\' for help',
+        color: 'danger',
+        icon: 'warning',
+        position: 'top',
+        buttons: [
+          {
+            text: 'Okay!',
+            role: 'cancel',
+            handler: () => {
+              console.log('Toast dismissed');
+            }
+          }
+        ]
+      });
+
+      toast.present();
     }
+
+    let timeTaken = Date.now() - start;
+    this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
@@ -207,9 +249,10 @@ export class HomePage {
         timestamp: this.resultsArray[i][1].timestamp,
         date: this.metadata[this.resultsArray[i][1].video_id].date
       };
-
+      document.getElementById('landing-info').hidden = true;
       this.vidObjects.push(vidObj);
     }
+
     const time = this.timeFunction(this.vidObjects[0].timestamp);
     window.open('https://www.youtube.com/embed/' + this.vidObjects[0].videoid + '?start=' + time, '_blank');
   }
