@@ -51,6 +51,7 @@ export class HomePage {
   showLanding(){
     console.log('Within showLanding');
     document.getElementById('landing-info').hidden = false;
+    this.vidObjects = [];
   }
 
   changeColors(){
@@ -76,12 +77,13 @@ export class HomePage {
     this.resultsArray = [];
     this.vidObjects = [];
 
-    const start = Date.now();
 
     const data = this.searchQuery;
     console.log('Query: ' + data);
 
     try{
+      const start = Date.now();
+
       const query = await fetch(
         `http://35.230.150.245:9090/?query=${data.replace(' ', '_')}`,
         {
@@ -115,6 +117,9 @@ export class HomePage {
           this.resultsArray.push(res[index]);
         }
       }
+
+      let timeTaken = Date.now() - start;
+      this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
     } catch(e){
       console.log(e);
 
@@ -136,9 +141,6 @@ export class HomePage {
 
       toast.present();
     }
-
-    let timeTaken = Date.now() - start;
-    this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
@@ -169,9 +171,9 @@ export class HomePage {
     const randomElement = Math.floor(Math.random() * this.feelingLucky.length);
     console.log('Query: ' + this.feelingLucky[randomElement]);
 
-    const start = Date.now();
-
     try{
+      const start = Date.now();
+
       const query = await fetch(
         `http://35.230.150.245:9090/?query=${this.feelingLucky[randomElement].replace(' ', '_')}`,
         {
@@ -205,6 +207,9 @@ export class HomePage {
           this.resultsArray.push(res[index]);
         }
       }
+
+      let timeTaken = Date.now() - start;
+      this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
     } catch(e){
       console.log(e);
 
@@ -226,9 +231,6 @@ export class HomePage {
 
       toast.present();
     }
-
-    let timeTaken = Date.now() - start;
-    this.timeTakenString = ': 500 results in ' + Number(timeTaken) + 'ms!'
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
