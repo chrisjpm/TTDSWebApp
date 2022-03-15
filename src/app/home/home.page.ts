@@ -36,6 +36,7 @@ export class HomePage {
   metadata: any = {};
 
   vidObjects: VidObject[] = [];
+  query: string;
   timeTakenString: string;
 
   constructor(private domSanitizer: DomSanitizer, public toastController: ToastController) {
@@ -51,6 +52,7 @@ export class HomePage {
   showLanding(){
     console.log('Within showLanding');
     document.getElementById('landing-info').hidden = false;
+    this.timeTakenString = '';
     this.vidObjects = [];
   }
 
@@ -168,14 +170,22 @@ export class HomePage {
   }
 
   async imFeelingLucky(){
-    const randomElement = Math.floor(Math.random() * this.feelingLucky.length);
-    console.log('Query: ' + this.feelingLucky[randomElement]);
+    for (let i = 0; i < 2; i++){
+      const randomElement = Math.floor(Math.random() * this.feelingLucky.length);
+      if (i == 0) {
+        this.query = this.feelingLucky[randomElement];
+      } else {
+        this.query += ' ' + this.feelingLucky[randomElement];
+      }
+    }
+
+    console.log('Query: ' + this.query);
 
     try{
       const start = Date.now();
 
       const query = await fetch(
-        `http://35.230.150.245:9090/?query=${this.feelingLucky[randomElement].replace(' ', '_')}`,
+        `http://35.230.150.245:9090/?query=${this.query.replace(' ', '_')}`,
         {
           method: 'GET',
           mode: 'cors',
@@ -234,11 +244,9 @@ export class HomePage {
 
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
-
       console.log('Structure of a result');
       console.log(this.resultsArray[i]);
       console.log(this.resultsArray[i][1].video_id);
-
       console.log(this.metadata);
 
       const vidObj: VidObject = {
