@@ -105,7 +105,7 @@ export class HomePage {
       const start = Date.now();
 
       const query = await fetch(
-        `http://35.230.150.245:9090/?query=${data.replace(' ', '_')}`,
+        `http://34.89.25.157:9090/?query=${data.replace(' ', '_')}`,
         {
           method: 'GET',
           mode: 'cors',
@@ -213,7 +213,7 @@ export class HomePage {
       const start = Date.now();
 
       const query = await fetch(
-        `http://35.230.150.245:9090/?query=${this.query.replace(' ', '_')}`,
+        `http://34.89.25.157:9090/?query=${this.query.replace(' ', '_')}`,
         {
           method: 'GET',
           mode: 'cors',
