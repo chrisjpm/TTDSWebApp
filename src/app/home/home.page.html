@@ -23,40 +23,40 @@
             <ion-toggle checked={{prefersDark}} (ionChange)="changeColors()" id="themeToggle" slot="end"></ion-toggle>
           </ion-item>
           <ion-item>
-            <ion-icon name="filter"></ion-icon>&nbsp;&nbsp;&nbsp;Filters
+            <ion-icon name="filter"></ion-icon>&nbsp;&nbsp;&nbsp;Filter
           </ion-item>
           <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
-                  <ion-label>Time Frame</ion-label>
+                  <ion-label>{{timeFrame}}</ion-label>
                 </ion-item>
 
                 <ion-list slot="content">
-                  <ion-item>
+                  <ion-item button (click)="changeTime('Any Time', 262800)">
                     <ion-label>Any Time</ion-label>
                   </ion-item>
-                  <ion-item>
-                    <ion-label>Past Hour</ion-label>
+                  <ion-item button (click)="changeTime('Past 6 Months', 4380)">
+                    <ion-label>Past 6 Months</ion-label>
                   </ion-item>
-                  <ion-item>
-                    <ion-label>Past 24 Hours</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Past Week</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Past Month</ion-label>
-                  </ion-item>
-                  <ion-item>
+                  <ion-item button (click)="changeTime('Past Year', 8760)">
                     <ion-label>Past Year</ion-label>
+                  </ion-item>
+                  <ion-item button (click)="changeTime('Past 2 Years', 17520)">
+                    <ion-label>Past 2 Years</ion-label>
+                  </ion-item>
+                  <ion-item button (click)="changeTime('Past 5 Years', 43800)">
+                    <ion-label>Past 5 Years</ion-label>
+                  </ion-item>
+                  <ion-item button (click)="changeTime('Past Decade', 87600)">
+                    <ion-label>Past Decade</ion-label>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
           </ion-item>
 
-          <ion-item>
+          <!-- <ion-item>
             <ion-accordion-group>
               <ion-accordion value="shapes">
                 <ion-item slot="header">
@@ -64,68 +64,46 @@
                 </ion-item>
 
                 <ion-list slot="content">
-                  <!-- can dynamically add topics if just filtering results (not searching again) -->
-                  <ion-item>
-                    <ion-label>Knowledge</ion-label> <!-- very common -->
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Technology</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Politics</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Society</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Religion</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Business</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Health</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Lifestyle (Sociology)</ion-label> <!-- very common -->
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Sport</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Physical Fitness</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Entertainment</ion-label> <!-- very common -->
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Film</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Television Program</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Music</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Hobby</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Video Game</ion-label> <!-- not sure if it's own topic, but is substring of many -->
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Food</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Fashion</ion-label>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>Pet</ion-label>
+                  <ion-item *ngFor="let entry of topicsList">
+                    <ion-label>{{entry.val}}</ion-label>
+                    <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
                   </ion-item>
                 </ion-list>
               </ion-accordion>
             </ion-accordion-group>
-          </ion-item>
+          </ion-item> -->
+
+
+                  <!-- can dynamically add topics if just filtering results (not searching again) -->
+                  <!-- <ion-item>
+                    <ion-label>All Topics</ion-label>
+                    <ion-checkbox [(ngModel)]="entry.isChecked" slot="end" value="all"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Knowledge</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Knowledge"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Technology</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Technology"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Politics</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Politics"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Society</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Society"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Business</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Business"></ion-checkbox>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Health</ion-label>
+                    <ion-checkbox checked="false" slot="end" value="Health"></ion-checkbox>
+                  </ion-item> -->
+
         </ion-list>
       </ion-content>
     </ng-template>
@@ -137,6 +115,7 @@
         <ion-col size-md="8">
           <ion-button class="search-button" color="primary" (click)="search()" expand="block">Search&nbsp;&nbsp;&nbsp;<ion-icon name="search"></ion-icon>
           </ion-button>
+          <ion-button (click) = "helperFunc()" block>Helper Func</ion-button>
         </ion-col>
         <ion-col size-md="4">
           <ion-button class="search-button" color="tertiary" (click)="imFeelingLucky()" expand="block">I'm feeling lucky&nbsp;&nbsp;&nbsp;<ion-icon name="sparkles"></ion-icon>
@@ -235,56 +214,63 @@
     <ion-col size-md="8" offset-md="2">
       <ion-card>
         <ion-item color="success" class="ion-text-center">
-          <ion-icon class="search-res" name="information-circle"></ion-icon>&nbsp;&nbsp;&nbsp;Search details{{timeTakenString}}
+          <ion-icon class="search-res" name="information-circle"></ion-icon>&nbsp;&nbsp;&nbsp;Search details (unfiltered){{timeTakenString}}
         </ion-item>
       </ion-card>
     </ion-col>
   </ion-row>
 
   <ion-grid>
-    <ion-row *ngFor="let vidObj of vidObjects; let i = index">
-      <ion-col size-md="8" offset-md="2">
-        <ion-card class="card-result">
-          <ion-row>
-            <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
-              <a href="{{'https://www.youtube.com/embed/' + vidObj.videoid}}" target="_blank">
-                <img src="assets/play.jpg" class="play-img">
-                <img class="card-thumb" src="{{'https://img.youtube.com/vi/'+vidObj.videoid+'/mqdefault.jpg'}}" />
-              </a>
-            </ion-col>
-            <ion-col size-lg="7" size-sm="12" size-xs="12">
-              <ion-card-content>
-                <ion-card-title>
-                  <span class="span-link" (click)="clickTitle(vidObj.videoid)">{{vidObj.videoTitle}}</span>
-                </ion-card-title>
-                <ion-card-subtitle>
-                  Channel Name: <span class="span-link" (click)="clickChannel(vidObj.channelId)">{{vidObj.channelTitle}}</span>
-                </ion-card-subtitle>
-                <ion-card-subtitle>Date published: {{vidObj.date}}</ion-card-subtitle>
+    <div *ngFor="let vidObj of vidObjects; let i = index">
+      <div *ngIf="(vidObj.date > dateConstraint)">
+        <ion-row>
+          <ion-col size-md="8" offset-md="2">
+            <ion-card class="card-result">
+              <ion-row>
+                <ion-col class="card-col" size-lg="5" size-sm="12" size-xs="12">
+                  <a href="{{'https://www.youtube.com/embed/' + vidObj.videoid}}" target="_blank">
+                    <img src="assets/play.jpg" class="play-img">
+                    <img class="card-thumb" src="{{'https://img.youtube.com/vi/'+vidObj.videoid+'/mqdefault.jpg'}}" />
+                  </a>
+                </ion-col>
+                <ion-col size-lg="7" size-sm="12" size-xs="12">
+                  <ion-card-content>
+                    <ion-card-title>
+                      <span class="span-link" (click)="clickTitle(vidObj.videoid)">{{vidObj.videoTitle}}</span>
+                    </ion-card-title>
+                    <ion-card-subtitle>
+                      Channel Name: <span class="span-link" (click)="clickChannel(vidObj.channelId)">{{vidObj.channelTitle}}</span>
+                    </ion-card-subtitle>
+                    <ion-card-subtitle>Date published: {{vidObj.date}}</ion-card-subtitle>
 
-                <section class="card-section">
-                  <ion-card-subtitle>Topics:</ion-card-subtitle>
-                  <ion-badge *ngFor="let topic of vidObj.topics" color="medium">{{topic}}</ion-badge>
-                </section>
+                    <section class="card-section">
+                      <ion-card-subtitle>Topics:</ion-card-subtitle>
+                      <ion-badge *ngFor="let topic of vidObj.topics" color="medium">{{topic}}</ion-badge>
+                    </section>
 
-                <section class="card-section">
-                  <ion-card-subtitle>Tags:</ion-card-subtitle>
-                  <ion-badge *ngFor="let tag of vidObj.videoTags" color="medium">{{tag}}</ion-badge>
-                </section>
+                    <section class="card-section">
+                      <ion-card-subtitle>Tags:</ion-card-subtitle>
+                      <ion-badge *ngFor="let tag of vidObj.videoTags" color="medium">{{tag}}</ion-badge>
+                    </section>
 
-                <section class="card-section">
-                  <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
-                  <ion-button href="{{'https://www.youtube.com/embed/' + vidObj.videoid +'?start='+timeFunction(vidObj.timestamp)}}" target="_blank" size="small">
-                    {{vidObj.timestamp}}<ion-icon name="play" style="margin:-2px 0 0 2px"></ion-icon>
-                  </ion-button>
-                </section>
-              </ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+                    <section class="card-section">
+                      <ion-card-subtitle>We recommend to start at:</ion-card-subtitle>
+                      <ion-button href="{{'https://www.youtube.com/embed/' + vidObj.videoid +'?start='+timeFunction(vidObj.timestamp)}}" target="_blank" size="small">
+                        {{vidObj.timestamp}}<ion-icon name="play" style="margin:-2px 0 0 2px"></ion-icon>
+                      </ion-button>
+                    </section>
 
+                    <section class="card-section">
+                      <ion-card-subtitle>Caption: "<span class="caption">{{vidObj.caption}}</span>"</ion-card-subtitle>
+                    </section>
+                  </ion-card-content>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
   </ion-grid>
   <!--
   <ion-button block="true" (click)="timeFunction('')">Time Function</ion-button> -->

@@ -10,7 +10,8 @@ export interface VidObject{
   topics: string[];
   videoTags: string[];
   timestamp: string;
-  date: string;
+  date: Date;
+  caption: string;
 }
 
 @Component({
@@ -39,6 +40,20 @@ export class HomePage {
   query: string;
   timeTakenString: string;
 
+  timeFrame: string;
+  dateConstraint: Date;
+
+  // topicsList: string[] = ['Knowledge', 'Technology', 'Politics', 'Society', 'Business', 'Health'];
+  public topicsList = [
+    { val: 'All Topics', isChecked: true },
+    { val: 'Knowledge', isChecked: false },
+    { val: 'Technology', isChecked: false },
+    { val: 'Politics', isChecked: false },
+    { val: 'Society', isChecked: false },
+    { val: 'Business', isChecked: false },
+    { val: 'Health', isChecked: false }
+  ];
+
   constructor(private domSanitizer: DomSanitizer, public toastController: ToastController) {
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (systemDark){
@@ -47,6 +62,9 @@ export class HomePage {
     } else {
       this.prefersDark = false;
     }
+
+    this.timeFrame = 'Time Frame';
+    this.dateConstraint = null;
   }
 
   showLanding(){
@@ -142,10 +160,16 @@ export class HomePage {
 
       toast.present();
     }
-    let num_res = 0;
+    let numRes = 0;
+    console.log('Object is: ');
+    console.log(this.resultsArray[1]);
+    console.log('Caption is');
+    console.log(this.resultsArray[1][1].text);
+    console.log('Score is');
+    console.log(this.resultsArray[1][1].score);
     // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
-      if (this.resultsArray[i][1].video_id !== undefined) {
+      try {
         const vidObj: VidObject = {
           videoid: this.resultsArray[i][1].video_id,
           videoTitle: this.metadata[this.resultsArray[i][1].video_id].title,
@@ -154,20 +178,28 @@ export class HomePage {
           topics: this.metadata[this.resultsArray[i][1].video_id].topic,
           videoTags: this.metadata[this.resultsArray[i][1].video_id].tags,
           timestamp: this.resultsArray[i][1].timestamp,
-          date: this.metadata[this.resultsArray[i][1].video_id].date
+          date: new Date(Date.parse(this.metadata[this.resultsArray[i][1].video_id].date)),
+          caption: this.resultsArray[i][1].text
         };
         document.getElementById('landing-info').hidden = true;
         this.vidObjects.push(vidObj);
-        num_res += 1;
+        numRes += 1;
+      } catch(e){
+        console.log(e);
       }
-      this.timeTakenString = ': ' + num_res + ' results in ' + Number(timeTaken) + 'ms!'
     }
+    this.timeTakenString = ': ' + numRes + ' results in ' + Number(timeTaken) + 'ms!';
+    console.log('Time taken string is: '+this.timeTakenString);
   }
 
   async imFeelingLucky(){
+
+    this.resultsArray = [];
+    this.vidObjects = [];
+
     for (let i = 0; i < 2; i++){
       const randomElement = Math.floor(Math.random() * this.feelingLucky.length);
-      if (i == 0) {
+      if (i === 0) {
         this.query = this.feelingLucky[randomElement];
       } else {
         this.query += ' ' + this.feelingLucky[randomElement];
@@ -175,6 +207,7 @@ export class HomePage {
     }
 
     console.log('Query: ' + this.query);
+    let timeTaken = 0;
 
     try{
       const start = Date.now();
@@ -213,8 +246,7 @@ export class HomePage {
         }
       }
 
-      let timeTaken = Date.now() - start;
-      this.timeTakenString = ': ' + (res.length - 1) + ' results in ' + Number(timeTaken) + 'ms!'
+      timeTaken = Date.now() - start;
     } catch(e){
       console.log(e);
 
@@ -238,20 +270,30 @@ export class HomePage {
     }
 
     // eslint-disable-next-line guard-for-in
+    let numRes = 0;
+    // eslint-disable-next-line guard-for-in
     for (const i in this.resultsArray){
-      const vidObj: VidObject = {
-        videoid: this.resultsArray[i][1].video_id,
-        videoTitle: this.metadata[this.resultsArray[i][1].video_id].title,
-        channelId: this.metadata[this.resultsArray[i][1].video_id].channelId,
-        channelTitle: this.metadata[this.resultsArray[i][1].video_id].channelTitle,
-        topics: this.metadata[this.resultsArray[i][1].video_id].topic,
-        videoTags: this.metadata[this.resultsArray[i][1].video_id].tags,
-        timestamp: this.resultsArray[i][1].timestamp,
-        date: this.metadata[this.resultsArray[i][1].video_id].date
-      };
-      document.getElementById('landing-info').hidden = true;
-      this.vidObjects.push(vidObj);
+      try {
+        const vidObj: VidObject = {
+          videoid: this.resultsArray[i][1].video_id,
+          videoTitle: this.metadata[this.resultsArray[i][1].video_id].title,
+          channelId: this.metadata[this.resultsArray[i][1].video_id].channelId,
+          channelTitle: this.metadata[this.resultsArray[i][1].video_id].channelTitle,
+          topics: this.metadata[this.resultsArray[i][1].video_id].topic,
+          videoTags: this.metadata[this.resultsArray[i][1].video_id].tags,
+          timestamp: this.resultsArray[i][1].timestamp,
+          date: new Date(Date.parse(this.metadata[this.resultsArray[i][1].video_id].date)),
+          caption: this.resultsArray[i][1].text
+        };
+        document.getElementById('landing-info').hidden = true;
+        this.vidObjects.push(vidObj);
+        numRes += 1;
+      } catch(e){
+        console.log(e);
+      }
     }
+    this.timeTakenString = ': ' + numRes + ' results in ' + Number(timeTaken) + 'ms!';
+    console.log('Time taken string is '+this.timeTakenString);
 
     const time = this.timeFunction(this.vidObjects[0].timestamp);
     window.open('https://www.youtube.com/embed/' + this.vidObjects[0].videoid + '?start=' + time, '_blank');
@@ -280,5 +322,20 @@ export class HomePage {
 
   githubLink(id: string) {
     window.open('https://github.com/' + id, '_blank');
+  }
+
+  helperFunc(){console.log(this.topicsList);
+
+  }
+
+  changeTime(time: string, hours: number){
+    this.timeFrame = time;
+    if (hours !== null){
+      const beginDate = new Date();
+      beginDate.setHours(beginDate.getHours() - hours);
+      console.log(beginDate);
+      this.dateConstraint = beginDate;
+    }
+
   }
 }
